@@ -1,5 +1,5 @@
 allowBuilds:
   unrs-resolver: true
 
-# a package should be 3 years old to prevent a supply chain attack
+# Packages should be at least 3 days old to prevent newly created corrupted dependencies aka supply chain attacks 
 minimumReleaseAge: 4320
