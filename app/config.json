@@ -2,5 +2,6 @@
   "feedTileToggle": false,
   "aiToggle": false,
   "defaultView": "feed",
-  "postCounter": true
+  "postCounter": true,
+  "searchBar": true
 }
