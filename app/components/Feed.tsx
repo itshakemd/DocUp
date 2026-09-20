@@ -10,6 +10,7 @@ function pluralize(count: number, word: string): string {
 
 export default function Feed({ posts }: { posts: TPost[] }) {
   const [query, setQuery] = useState("")
+  const [viewMode, setViewMode] = useState<"feed" | "tile">("feed")
 
   const trimmed = query.trim()
   const first = trimmed.charAt(0)
@@ -149,18 +150,53 @@ export default function Feed({ posts }: { posts: TPost[] }) {
         </div>
       )}
 
-      <p className="mb-4 text-[13px] text-faint">
-        {pluralize(count, "post")} of {pluralize(total, "post")}
-      </p>
+      <div className="mb-4 flex items-center justify-between">
+        <p className="text-[13px] text-faint">
+          {pluralize(count, "post")} of {pluralize(total, "post")}
+        </p>
+        <div className="flex items-center gap-1 rounded-lg border border-border bg-surface p-1">
+          <button
+            onClick={() => setViewMode("feed")}
+            className={`flex items-center justify-center rounded-md px-2 py-1 text-xs font-medium transition-colors ${
+              viewMode === "feed"
+                ? "bg-background text-foreground shadow-sm border border-border/50"
+                : "text-faint hover:text-foreground"
+            }`}
+          >
+            Feed
+          </button>
+          <button
+            onClick={() => setViewMode("tile")}
+            className={`flex items-center justify-center rounded-md px-2 py-1 text-xs font-medium transition-colors ${
+              viewMode === "tile"
+                ? "bg-background text-foreground shadow-sm border border-border/50"
+                : "text-faint hover:text-foreground"
+            }`}
+          >
+            Tile
+          </button>
+        </div>
+      </div>
 
       {count === 0 ? (
         <p className="py-24 text-center text-[15px] text-muted">
           No posts found.
         </p>
       ) : (
-        <div className="flex flex-col">
+        <div
+          className={
+            viewMode === "feed"
+              ? "flex flex-col"
+              : "columns-1 gap-4 sm:columns-2"
+          }
+        >
           {filteredPosts.map((post) => (
-            <PostCard key={post.id} post={post} />
+            <div
+              key={post.id}
+              className={viewMode === "tile" ? "mb-4 break-inside-avoid" : ""}
+            >
+              <PostCard post={post} viewMode={viewMode} />
+            </div>
           ))}
         </div>
       )}
