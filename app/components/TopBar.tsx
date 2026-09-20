@@ -1,6 +1,7 @@
 import Link from "next/link"
 import ThemeToggle from "./ThemeToggle"
 import AIChat from "./AIChat"
+import config from "@/app/config.json"
 
 export default function TopBar() {
   return (
@@ -10,11 +11,11 @@ export default function TopBar() {
           href="/"
           className="shrink-0 text-[14px] font-semibold text-foreground transition-colors hover:text-muted"
         >
-          DocUp
+          {config.siteTitle}
         </Link>
         <div className="flex items-center gap-1.5">
           <ThemeToggle />
-          <AIChat />
+          {config.aiToggle && <AIChat />}
         </div>
       </div>
     </header>
