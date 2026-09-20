@@ -33,7 +33,7 @@ You can use this as either:
 1. Install dependencies:
 
 ```bash
-pnpm install
+npm install
 ```
 
 2. Create a `.env` file in the project root:
@@ -48,7 +48,7 @@ OPENROUTER_MODEL=openrouter/auto
 3. Start the development server:
 
 ```bash
-pnpm dev
+npm run dev
 ```
 
 4. Open http://localhost:3000 in your browser.
@@ -64,6 +64,38 @@ pnpm dev
 
 - `OPENROUTER_API_KEY`: enables the AI assistant in the UI
 - `OPENROUTER_MODEL`: overrides the default model, defaults to `openrouter/auto`
+
+## Configuration
+
+UI behavior can be customized in [`app/config.json`](app/config.json):
+
+| Option | Default | Description |
+| --- | --- | --- |
+| `siteTitle` | `DocUp` | Site title shown in the header and on the home page |
+| `defaultView` | `tile` | Initial feed layout: `feed` or `tile` |
+| `feedTileToggle` | `true` | Shows the control for switching between feed and tile layouts |
+| `searchBar` | `true` | Enables the home page search and filtering input |
+| `postCounter` | `true` | Shows the filtered post count |
+| `postImages` | `true` | Shows post thumbnails when available |
+| `aiToggle` | `false` | Shows the AI assistant when `true` and `OPENROUTER_API_KEY` is configured |
+| `tagFilterChar` | `/` | Prefix used to filter posts by tag, for example `/nextjs` |
+| `categoryFilterChar` | `#` | Prefix used to filter posts by category, for example `#essays` |
+
+Example configuration:
+
+```json
+{
+	"feedTileToggle": true,
+	"aiToggle": false,
+	"defaultView": "tile",
+	"postCounter": true,
+	"searchBar": true,
+	"postImages": true,
+	"siteTitle": "DocUp",
+	"tagFilterChar": "/",
+	"categoryFilterChar": "#"
+}
+```
 
 ## Notion Content Model
 
