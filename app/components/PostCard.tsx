@@ -1,6 +1,7 @@
 import type { TPost } from "@/app/lib/types"
 import Image from "next/image"
 import Link from "next/link"
+import config from "@/app/config.json"
 
 function formatDate(dateStr: string): string {
   try {
@@ -27,7 +28,7 @@ export default function PostCard({ post, viewMode = "feed" }: { post: TPost, vie
           : "items-center justify-between gap-4 px-3 py-3"
       } rounded-lg transition-colors hover:bg-surface`}
     >
-      {isTile && post.thumbnail && (
+      {config.postImages && isTile && post.thumbnail && (
         <div className="relative h-40 w-full shrink-0 overflow-hidden rounded-md border border-border/50">
           <Image
             src={post.thumbnail}
@@ -59,7 +60,7 @@ export default function PostCard({ post, viewMode = "feed" }: { post: TPost, vie
           {formatDate(date)}
         </time>
       </div>
-      {!isTile && post.thumbnail && (
+      {config.postImages && !isTile && post.thumbnail && (
         <div className="relative h-11 w-11 shrink-0 overflow-hidden rounded-md">
           <Image
             src={post.thumbnail}

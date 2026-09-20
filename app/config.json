@@ -3,5 +3,6 @@
   "aiToggle": false,
   "defaultView": "feed",
   "postCounter": true,
-  "searchBar": true
+  "searchBar": true,
+  "postImages": true
 }
