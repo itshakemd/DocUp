@@ -3,6 +3,7 @@
 import { useState, useMemo } from "react"
 import type { TPost } from "@/app/lib/types"
 import PostCard from "./PostCard"
+import config from "@/app/config.json"
 
 function pluralize(count: number, word: string): string {
   return `${count} ${word}${count === 1 ? "" : "s"}`
@@ -10,7 +11,9 @@ function pluralize(count: number, word: string): string {
 
 export default function Feed({ posts }: { posts: TPost[] }) {
   const [query, setQuery] = useState("")
-  const [viewMode, setViewMode] = useState<"feed" | "tile">("feed")
+  const [viewMode, setViewMode] = useState<"feed" | "tile">(
+    (config.defaultView as "feed" | "tile") || "feed"
+  )
 
   const trimmed = query.trim()
   const first = trimmed.charAt(0)
@@ -151,31 +154,37 @@ export default function Feed({ posts }: { posts: TPost[] }) {
       )}
 
       <div className="mb-4 flex items-center justify-between">
-        <p className="text-[13px] text-faint">
-          {pluralize(count, "post")} of {pluralize(total, "post")}
-        </p>
-        <div className="flex items-center gap-1 rounded-lg border border-border bg-surface p-1">
-          <button
-            onClick={() => setViewMode("feed")}
-            className={`flex items-center justify-center rounded-md px-2 py-1 text-xs font-medium transition-colors ${
-              viewMode === "feed"
-                ? "bg-background text-foreground shadow-sm border border-border/50"
-                : "text-faint hover:text-foreground"
-            }`}
-          >
-            Feed
-          </button>
-          <button
-            onClick={() => setViewMode("tile")}
-            className={`flex items-center justify-center rounded-md px-2 py-1 text-xs font-medium transition-colors ${
-              viewMode === "tile"
-                ? "bg-background text-foreground shadow-sm border border-border/50"
-                : "text-faint hover:text-foreground"
-            }`}
-          >
-            Tile
-          </button>
-        </div>
+        {config.postCounter ? (
+          <p className="text-[13px] text-faint">
+            {pluralize(count, "post")} of {pluralize(total, "post")}
+          </p>
+        ) : (
+          <div /> // Placeholder to keep flex-between spacing
+        )}
+        {config.feedTileToggle && (
+          <div className="flex items-center gap-1 rounded-lg border border-border bg-surface p-1">
+            <button
+              onClick={() => setViewMode("feed")}
+              className={`flex items-center justify-center rounded-md px-2 py-1 text-xs font-medium transition-colors ${
+                viewMode === "feed"
+                  ? "bg-background text-foreground shadow-sm border border-border/50"
+                  : "text-faint hover:text-foreground"
+              }`}
+            >
+              Feed
+            </button>
+            <button
+              onClick={() => setViewMode("tile")}
+              className={`flex items-center justify-center rounded-md px-2 py-1 text-xs font-medium transition-colors ${
+                viewMode === "tile"
+                  ? "bg-background text-foreground shadow-sm border border-border/50"
+                  : "text-faint hover:text-foreground"
+              }`}
+            >
+              Tile
+            </button>
+          </div>
+        )}
       </div>
 
       {count === 0 ? (
