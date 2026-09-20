@@ -1,9 +1,11 @@
 {
-  "feedTileToggle": false,
+  "feedTileToggle": true,
   "aiToggle": false,
   "defaultView": "tile",
   "postCounter": true,
   "searchBar": true,
   "postImages": true,
-  "siteTitle": "DocUp"
+  "siteTitle": "DocUp",
+  "tagFilterChar": "/",
+  "categoryFilterChar": "#"
 }

@@ -19,7 +19,7 @@ export default function Feed({ posts }: { posts: TPost[] }) {
   const first = trimmed.charAt(0)
 
   const mode: "tag" | "category" | null =
-    first === "/" ? "tag" : first === "#" ? "category" : null
+    first === config.tagFilterChar ? "tag" : first === config.categoryFilterChar ? "category" : null
 
   const isTagMode = mode === "tag"
   const isCategoryMode = mode === "category"
@@ -84,7 +84,7 @@ export default function Feed({ posts }: { posts: TPost[] }) {
   const total = posts.length
 
   const applySuggestion = (value: string) => {
-    setQuery(`${isTagMode ? "/" : "#"}${value}`)
+    setQuery(`${isTagMode ? config.tagFilterChar : config.categoryFilterChar}${value}`)
   }
 
   return (
@@ -125,7 +125,7 @@ export default function Feed({ posts }: { posts: TPost[] }) {
           />
           <div className="pointer-events-none absolute right-3 top-1/2 flex -translate-y-1/2 gap-1">
             <kbd className="rounded border border-border bg-background px-1.5 py-0.5 text-[11px] font-medium text-faint">
-              {hasFilter ? (isTagMode ? "/" : "#") : "Search"}
+              {hasFilter ? (isTagMode ? config.tagFilterChar : config.categoryFilterChar) : "Search"}
             </kbd>
           </div>
         </div>
