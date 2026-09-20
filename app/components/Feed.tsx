@@ -91,7 +91,7 @@ export default function Feed({ posts }: { posts: TPost[] }) {
     <div className="w-full pt-16">
       <section className="mb-8 text-center">
         <h1 className="text-4xl font-bold tracking-tight text-foreground">
-          DocUp
+          {config.siteTitle}
         </h1>
       </section>
 

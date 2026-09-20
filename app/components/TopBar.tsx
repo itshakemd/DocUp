@@ -11,7 +11,7 @@ export default function TopBar() {
           href="/"
           className="shrink-0 text-[14px] font-semibold text-foreground transition-colors hover:text-muted"
         >
-          DocUp
+          {config.siteTitle}
         </Link>
         <div className="flex items-center gap-1.5">
           <ThemeToggle />

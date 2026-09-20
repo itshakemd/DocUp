@@ -1,8 +1,9 @@
 {
   "feedTileToggle": false,
   "aiToggle": false,
-  "defaultView": "feed",
+  "defaultView": "tile",
   "postCounter": true,
   "searchBar": true,
-  "postImages": true
+  "postImages": true,
+  "siteTitle": "DocUp"
 }
