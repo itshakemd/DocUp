@@ -1,7 +1,7 @@
 {
   "feedTileToggle": true,
-  "aiToggle": false,
-  "defaultView": "tile",
+  "aiToggle": true,
+  "defaultView": "feed",
   "postCounter": true,
   "searchBar": true,
   "postImages": true,
