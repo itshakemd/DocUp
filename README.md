@@ -149,6 +149,14 @@ Category: essays
 - Put the content of each post in the page body; the app will render the Notion blocks automatically.
 - Use `Thumbnail` for a hero image if you want one on the post page.
 
+### Behavior tags
+
+Some reserved tags configure how a post behaves and are not exposed as normal
+content tags in search or filter suggestions:
+
+- `pin`: keeps the post above unpinned posts in feeds. Multiple pinned posts use
+  the same newest-first date ordering as other posts.
+
 ### Public vs Private posts
 
 DocUp treats posts as public when `Status` is exactly `Public`.
