@@ -35,6 +35,13 @@ export function splitPostTags(tags: string[] = []): {
   return { contentTags, behaviorTags: Array.from(behaviorTags) }
 }
 
+export function hasPostBehavior(
+  post: Pick<TPost, "behaviorTags">,
+  behavior: TPostBehaviorTag
+): boolean {
+  return post.behaviorTags?.includes(behavior) ?? false
+}
+
 /** Higher-priority behaviors sort before lower-priority and normal posts. */
 export function comparePostBehaviorPriority(
   a: Pick<TPost, "behaviorTags">,
