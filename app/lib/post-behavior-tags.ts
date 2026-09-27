@@ -1,3 +1,5 @@
+import type { TPost } from "./types"
+
 /**
  * Tags in this registry configure post behavior and are not content tags.
  * Add future behavior tags here so parsing, filtering, and UI stay consistent.
@@ -31,4 +33,19 @@ export function splitPostTags(tags: string[] = []): {
   })
 
   return { contentTags, behaviorTags: Array.from(behaviorTags) }
+}
+
+/** Higher-priority behaviors sort before lower-priority and normal posts. */
+export function comparePostBehaviorPriority(
+  a: Pick<TPost, "behaviorTags">,
+  b: Pick<TPost, "behaviorTags">
+): number {
+  const priorityFor = (post: Pick<TPost, "behaviorTags">) =>
+    (post.behaviorTags ?? []).reduce(
+      (priority, behavior) =>
+        Math.max(priority, POST_BEHAVIOR_TAGS[behavior].feedPriority),
+      0
+    )
+
+  return priorityFor(b) - priorityFor(a)
 }

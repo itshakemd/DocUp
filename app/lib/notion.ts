@@ -1,6 +1,6 @@
 import { Client } from "@notionhq/client"
 import type { TPost, TPostType, TPostStatus } from "./types"
-import { splitPostTags } from "./post-behavior-tags"
+import { comparePostBehaviorPriority, splitPostTags } from "./post-behavior-tags"
 
 function getTextProperty(prop: any): string {
   if (!prop) return ""
@@ -152,6 +152,9 @@ export async function getPosts(): Promise<TPost[]> {
       return true
     })
     .sort((a, b) => {
+      const behaviorOrder = comparePostBehaviorPriority(a, b)
+      if (behaviorOrder !== 0) return behaviorOrder
+
       const dateA = new Date(a.date?.start_date || a.createdTime).getTime()
       const dateB = new Date(b.date?.start_date || b.createdTime).getTime()
       return dateB - dateA
