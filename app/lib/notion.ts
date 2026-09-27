@@ -1,5 +1,6 @@
 import { Client } from "@notionhq/client"
 import type { TPost, TPostType, TPostStatus } from "./types"
+import { splitPostTags } from "./post-behavior-tags"
 
 function getTextProperty(prop: any): string {
   if (!prop) return ""
@@ -125,6 +126,9 @@ export async function getPosts(): Promise<TPost[]> {
   const posts: TPost[] = allResults.map((page: any) => {
     const props = page.properties || {}
     const date = getDateProperty(props.date) || getDateProperty(props.Date)
+    const { contentTags, behaviorTags } = splitPostTags(
+      getMultiSelectProperty(props.tags || props.Tags)
+    )
     return {
       id: page.id,
       title: getFirstTextProperty(props),
@@ -134,7 +138,8 @@ export async function getPosts(): Promise<TPost[]> {
       status: getSelectProperty(props.status || props.Status) as TPostStatus | undefined,
       date,
       thumbnail: getFileProperty(props.thumbnail || props.Thumbnail),
-      tags: getMultiSelectProperty(props.tags || props.Tags),
+      tags: contentTags,
+      behaviorTags,
       category: getSelectProperty(props.category || props.Category),
       createdTime: page.created_time,
     }
