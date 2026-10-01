@@ -1,8 +1,8 @@
-# DocUp
+# DocUp  
 
 DocUp is a lightweight personal blog and knowledge base built with Next.js, React, and Notion. It pulls public posts from a Notion database, renders them in a clean feed, supports searching and filtering by tags and categories, and includes a small AI assistant powered by OpenRouter.
 
-## Features
+## Features 
 
 - Notion-powered content source
 - Searchable blog feed
